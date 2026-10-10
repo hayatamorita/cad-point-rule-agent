@@ -55,3 +55,11 @@ Read AGENTS.md and docs. Run M0 tests and synthetic CLI. Implement M1 in a focus
 - [x] CLI `legacy-index`, `legacy-search`, `legacy-promote` and regression tests.
 - [ ] OCCT-tested primitive promotion and typed DSL registration (M2/M3).
 - [ ] Auto-reuse promoted primitives during STEP rule synthesis and validation (M3).
+
+## Approved company-internal GitHub migration (planned)
+
+- [x] Document separate public/private working-copy strategy and internal-only `.gitignore` change in `docs/INTERNAL_MIGRATION.md`.
+- [ ] Create an authorized, access-controlled company-internal repository.
+- [ ] Import generic engine into a separate local clone with the internal repository as the ONLY push remote.
+- [ ] Commit approved legacy `.py` source under `data/legacy_pyocc/` on the internal repository; keep STEP and private labels governed by separate permissions.
+- [ ] Run local/internal legacy indexing and implement tested reviewed primitive promotion; never merge legacy-source commits back into public history.

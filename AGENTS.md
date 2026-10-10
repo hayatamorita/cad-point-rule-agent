@@ -52,3 +52,9 @@ The STEP #entity number identifies the supervised target **only within its sourc
 - For each promising match, use `cad-rule legacy-promote --function-id '<relative.py::qualified.function>'` to generate a review-required proposal and provenance. Never automatically import/execute old code.
 - Adapt/reimplement the useful geometric predicates/reference selectors into tested, deterministic functions under `src/cad_rule_agent/geometry_primitives/`, and register into the typed rule-synthesis DSL. Check data assumptions, OCCT version, transformations, tolerances, and behavior across three STEP variants. Do not propagate hardcoded file/STEP IDs/XYZ into learned rule.
 - The current catalog is a static AST keyword index, **not** production semantic extraction or an automatic adapter. Consult `docs/LEGACY_REUSE.md` and report that limitation accurately.
+
+## Public development vs. internal source-code migration
+
+This repo is a PUBLIC generic-engine development repository. Historical user scripts under `data/legacy_pyocc/` remain Git-ignored **here**. The confirmed destination for version-controlled historical pyocc source is a separate company-internal GitHub repository, not the current public origin. Follow `docs/INTERNAL_MIGRATION.md` when the approved internal remote exists; change the legacy ignore rules **only in the separate internal working copy**. Never merge private-source commits back into this public history.
+
+Agent access to legacy source is local or through an organization-approved internal runtime. The presence of historical `.py` code in a company GitHub repository is not authorization to send its content to outside cloud models.

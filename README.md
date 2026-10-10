@@ -61,6 +61,12 @@ PYTHONPATH=src python -m unittest discover -s tests -v
 
 これらは**予め計算されたBoolean特徴からのルール合成**を実証するものであり、STEPを直接解析する実装ではありません。
 
+## 個人GitHubから社内GitHubへの移行方針
+
+現在のGitHubは**公開された汎用エンジン開発用**です。過去のpyoccコードはローカルでのみ扱い、社内GitHubへ移行した後、その**社内リポジトリだけ**でGit管理を有効にします。
+
+具体的な移行方法、社内版 `.gitignore` の変更、Codexへの指示は [社内GitHub移行手順](docs/INTERNAL_MIGRATION.md) を参照してください。既存の公開リポジトリへ過去コードをpushする設定変更は行いません。
+
 ## Agentic coding への引き継ぎ
 
 - [AGENTS.md](AGENTS.md) — 開発エージェントの厳守事項
