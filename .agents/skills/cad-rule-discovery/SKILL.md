@@ -11,14 +11,14 @@ Read `AGENTS.md`, `docs/PRD.md`, `docs/ARCHITECTURE.md`, `docs/ACCEPTANCE_TESTS.
 1. Confirm approved CAD data access. Validate three STEP paths, each corresponding target STEP `#entity_id` (CARTESIAN_POINT or VERTEX_POINT), assembly occurrence ambiguity, vehicle axes, unit conversions and tolerances.
 2. Read assembly-aware geometry using supported STEP/XCAF importer, preserving part instances, frame transforms and topology. If importer is not implemented, build it first.
 3. Before defining new geometry predicates, consult local historical pyocc code using `cad-rule legacy-index` and `cad-rule legacy-search --query "<desired point's geometry relations>"`. Review relevant source functions locally and use `cad-rule legacy-promote --function-id '<file.py::function>'` to create a migration proposal. Do not execute historical scripts; port reviewed algorithms into tested primitives and then register them in the typed DSL (registration not yet implemented).
-11. Enumerate candidate vertices and compute geometry/topology features without access to target labels.
-4. Resolve each training STEP entity ID to CAD geometry/topology and an unambiguous model node for supervision only (M1, not implemented); reject zero/multiple matches. Never use STEP entity IDs as rule predicates.
-5. Generate predicates true for all target vertices. Include **all non-target vertices as negatives** so that useless shared predicates do not count as success.
-6. Search shortest consistent predicate combinations, then richer typed hierarchical traversals and reference selections.
-7. Execute the EXACT SAME rule on every variant, requiring one candidate matching each training label within the stated tolerance.
-8. On a counterexample, refine the grammar, reference selection and search. Do not insert per-type branching or memorize coordinates.
-9. Rank by rule simplicity, decision margin and geometric perturbation robustness. Test fourth type without a label when provided.
-10. Export serializable DSL, human explanation, traces, test data provenance and failure diagnostics. Never claim universal proof based on three samples.
+4. Enumerate candidate vertices and compute geometry/topology features without access to target labels.
+5. Resolve each training STEP entity ID to CAD geometry/topology and an unambiguous model node for supervision only (M1, not implemented); reject zero/multiple matches. Never use STEP entity IDs as rule predicates.
+6. Generate predicates true for all target vertices. Include **all non-target vertices as negatives** so that useless shared predicates do not count as success.
+7. Search shortest consistent predicate combinations, then richer typed hierarchical traversals and reference selections.
+8. Execute the EXACT SAME rule on every variant, requiring one candidate matching each training label within the stated tolerance.
+9. On a counterexample, refine the grammar, reference selection and search. Do not insert per-type branching or memorize coordinates.
+10. Rank by rule simplicity, decision margin and geometric perturbation robustness. Test fourth type without a label when provided.
+11. Export serializable DSL, human explanation, traces, test data provenance and failure diagnostics. Never claim universal proof based on three samples.
 
 ## Current prototype
 ```bash
