@@ -4,6 +4,7 @@ import argparse
 import json
 import sys
 from pathlib import Path
+from .inputs import DEFAULT_MANIFEST, validate_step_inputs
 from .core import (
     RuleError, apply_unique, load_model, make_training_cases,
     rule_from_dict, rule_to_dict, synthesize, verify_training_cases,
@@ -25,9 +26,13 @@ def main(argv: list[str] | None = None) -> int:
     apply = sub.add_parser("apply", help="Apply a rule to an unlabeled synthetic feature graph")
     apply.add_argument("--model", required=True)
     apply.add_argument("--rule", required=True)
+    check = sub.add_parser("check-inputs", help="Validate STEP file placement and labeled JSON (does not parse STEP)")
+    check.add_argument("--dataset", default=str(DEFAULT_MANIFEST))
     args = parser.parse_args(argv)
     try:
-        if args.command == "synthesize":
+        if args.command == "check-inputs":
+            print(json.dumps(validate_step_inputs(args.dataset), ensure_ascii=False, indent=2))
+        elif args.command == "synthesize":
             cases = make_training_cases(read_json(args.dataset))
             rule = synthesize(cases, max_predicates=args.max_predicates)
             report = verify_training_cases(cases, rule)

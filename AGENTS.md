@@ -39,3 +39,6 @@ Read README.md, docs/PRD.md, docs/ARCHITECTURE.md, docs/ACCEPTANCE_TESTS.md, doc
 
 ## Delegation
 Commit small reviewable milestones, explain architectural choices and exact test commands. Preserve this specification for future coding agents.
+
+## Standard supervised STEP input location
+When authorized real STEP datasets are available, read `data/training/README.md` and `data/training/labels.example.json`. A user puts `type_a.step`, `type_b.step`, `type_c.step`, and a locally copied and filled-in `labels.json` together under `data/training/`. Use `cad-rule check-inputs` to validate file presence and annotation JSON before implementing the STEP importer. This command does not inspect STEP geometry or perform rule synthesis. Do not alter this convention without updating the docs, tests and validator. Files with real CAD and labels must stay out of source control.

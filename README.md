@@ -17,6 +17,16 @@
 - 複数点に一致したとき最初の一点を黙って選ぶ
 - 学習3例の成功を未知STEPにおける一般化の証明と呼ぶ
 
+## 正解STEPとPoint指定JSONを置く場所
+
+[`data/training/`](data/training/README.md) に `type_a.step`, `type_b.step`, `type_c.step` を置き、[`data/training/labels.example.json`](data/training/labels.example.json) を **`data/training/labels.json`** としてコピーして3点の座標を記入してください。入力の形式を確認するには:
+
+```bash
+cad-rule check-inputs
+```
+
+`check-inputs` はファイルとJSONの整合性をチェックするだけで、**現時点でSTEPを開いて点を特定することはできません**。入力した実STEPはGitHubへpushせずローカルに置いてください（`labels.json` とSTEPはGitの追跡対象外）。
+
 ## 実行できる合成データのMVP
 
 Python 3.11以上、実行時外部依存なし。

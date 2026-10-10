@@ -8,6 +8,9 @@
 - [x] Synthetic holdout and unit tests.
 - [ ] Better error explanations, diagnostics, property-based tests and schema tooling.
 
+## Real STEP input convention
+Training files are placed locally in `data/training/type_a.step`, `type_b.step`, and `type_c.step`; the target-point coordinates go into `data/training/labels.json` (copy from `labels.example.json`). Run `cad-rule check-inputs` to validate paths and JSON. This command is not STEP parsing or point verification. Implement integration with OCCT in M1/M2.
+
 ## M1: STEP ingestion + labeling — START HERE
 - [ ] Choose pinned OCCT Python binding (pythonocc-core, OCP or FreeCAD Python) on the actual Mac/Linux environment; write installation/compatibility instructions.
 - [ ] Implement STEPCAFControl_Reader and XCAF assembly occurrence traversal, with local/world/vehicle transforms.

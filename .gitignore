@@ -20,3 +20,8 @@ data/private/
 *.IGES
 *.IGS
 *private*labels*.json
+
+# User-supplied CAD annotations (public repo: do NOT commit real point labels)
+/data/training/labels.json
+/data/training/*.step
+/data/training/*.stp
