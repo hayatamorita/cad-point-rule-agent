@@ -1,17 +1,26 @@
 {
-  "schema_version": 1,
-  "notes": "Future STEP experiment manifest. Requires a not-yet-implemented STEP import and labeling bridge.",
+  "schema_version": 2,
+  "notice": "Canonical template: data/training/labels.example.json. Copy it to data/training/labels.json. Entity IDs are examples ONLY.",
   "training_cases": [
     {
-      "step_path": "data/raw/type_a.step",
-      "point": {
-        "xyz_mm": [
-          120,
-          35,
-          20
-        ],
-        "coordinate_frame": "vehicle",
-        "tolerance_mm": 0.01
+      "variant": "a",
+      "step_file": "type_a.step",
+      "target_point": {
+        "entity_id": 118
+      }
+    },
+    {
+      "variant": "b",
+      "step_file": "type_b.step",
+      "target_point": {
+        "entity_id": 245
+      }
+    },
+    {
+      "variant": "c",
+      "step_file": "type_c.step",
+      "target_point": {
+        "entity_id": 361
       }
     }
   ]
