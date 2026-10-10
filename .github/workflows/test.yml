@@ -17,3 +17,5 @@ jobs:
       - run: cad-rule legacy-index --root examples --output results/legacy_index.json
       - run: cad-rule legacy-search --root examples --query "parallel edge closed loop"
       - run: cad-rule legacy-promote --root examples --function-id 'public_legacy_demo.py::find_parallel_edge_on_closed_wire' --output-dir results/legacy_proposals
+      - run: bash harness/run.sh demo --max-rounds 8
+      - run: bash harness/verify.sh runs/harness/demo/candidates/round_04.json

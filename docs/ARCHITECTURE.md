@@ -86,3 +86,16 @@ Local-only data/legacy_pyocc/**/*.py
   → registration in typed DSL grammar (future M2/M3)
 ```
 Before inventing a feature predicate, agent should search legacy history, inspect relevant local snippets, understand their constraints and adapt useful methods. A historical rule may itself encode stable references to Face/Wire/Edge/Vertex relationships, but its hardcoded coordinates, STEP entity IDs, assumed orientation, and source-specific filenames must be removed. A catalog hit is only a hypothesis: tests and reviewer approval govern actual DSL admission. The static shelf does NOT cause old code to execute or automatically affect current synthetic-rule inference. See [LEGACY_REUSE.md](LEGACY_REUSE.md).
+
+## Research-agent harness (M0.7)
+
+Supervisor: `src/cad_rule_agent/harness.py`. Goal: `harness/goal.synthetic.json`. Prompt: `harness/prompt.md`. Launch: `harness/run.sh`. Independent acceptance: `harness/verify.sh`. Journal: `runs/harness/*/exploration_log.jsonl`, `state.json`, `blueprint.md`, `verification.json`.
+
+- Hypothesis mode 1: deterministic bounded enumeration of conjunctions with growing complexity; every failed round produces feedback.
+- Hypothesis mode 2: optional bounded Codex CLI proposer; proposes a JSON DSL rule, receives deterministic rejection and can revise.
+- Validator enforces a single rule matching every labeled synthetic variant uniquely, complexity cap and one synthetic holdout. The demo holdout is visible/public, not blind.
+- Search state is persistent and tied to goal/input fingerprints. Completed runs re-verify candidate before reporting success.
+- Actual STEP input and STEP ID mapping are **not supported** in this harness yet; a real STEP mode fails closed.
+- Never let AI change verification criteria or train on evaluation labels; operate trusted local Codex mode with isolation and inspect code diffs.
+
+See [harness/README.md](../harness/README.md).

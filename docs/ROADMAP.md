@@ -63,3 +63,15 @@ Read AGENTS.md and docs. Run M0 tests and synthetic CLI. Implement M1 in a focus
 - [ ] Import generic engine into a separate local clone with the internal repository as the ONLY push remote.
 - [ ] Commit approved legacy `.py` source under `data/legacy_pyocc/` on the internal repository; keep STEP and private labels governed by separate permissions.
 - [ ] Run local/internal legacy indexing and implement tested reviewed primitive promotion; never merge legacy-source commits back into public history.
+
+## M0.7: Chen Yang-inspired hypothesis/verify/journal/retry harness
+
+- [x] Fixed synthetic goal, complexity-bounded candidate generation, per-round failure and feedback.
+- [x] Deterministic independent verification across three synthetic training variants and a public synthetic holdout.
+- [x] Reproducible state/checkpoint/fingerprint, exploration log, blueprint and verified rule outputs.
+- [x] Local launchers `harness/run.sh`, `harness/verify.sh` and reusable `harness/prompt.md`.
+- [x] Opt-in bounded Codex CLI proposer loop with independent verifier.
+- [ ] Add hardened isolated Codex executor for adversarial input; current workspace-write is a trusted development convenience.
+- [ ] Implement true STEP/XCAF feature extraction, entity-to-B-rep mapping and real STEP verifier.
+- [ ] Add autonomous DSL expansions and search over reviewed legacy primitives, evaluate on 3 training STEP models and separate holdout STEP.
+- [ ] Upgrade failure analysis to identify offending geometry graph nodes and propose corrective spatial/topological predicates.

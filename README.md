@@ -67,6 +67,19 @@ PYTHONPATH=src python -m unittest discover -s tests -v
 
 具体的な移行方法、社内版 `.gitignore` の変更、Codexへの指示は [社内GitHub移行手順](docs/INTERNAL_MIGRATION.md) を参照してください。既存の公開リポジトリへ過去コードをpushする設定変更は行いません。
 
+## Chen Yang方式を参考にした探索ハーネス
+
+[harness/README.md](harness/README.md) に「仮説生成 → 検証 → 失敗記録 → 再試行」の実行環境を追加しました。
+
+~~~bash
+bash harness/run.sh demo --max-rounds 8
+bash harness/verify.sh runs/harness/demo/candidates/round_04.json
+~~~
+
+自律反復の合成データ実証は動作します。Codex CLIをインストール・認証した信頼できるローカル環境では、明示的なコマンド `bash harness/run.sh codex --max-rounds 4` によるAI提案ループも利用できます。検証と記録はPythonが担当します。
+
+**重要:** まだ実STEPの幾何ルールを自動発見する実行エンジンではありません。実STEPの独立検証器の実装は次のマイルストーンです。
+
 ## Agentic coding への引き継ぎ
 
 - [AGENTS.md](AGENTS.md) — 開発エージェントの厳守事項

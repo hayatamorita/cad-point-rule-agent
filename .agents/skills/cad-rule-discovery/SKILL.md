@@ -31,3 +31,7 @@ This only verifies precomputed synthetic Boolean features. It does NOT process S
 MCP is optional and must use the tested Python core rather than replacing it.
 
 For implementation details and confidentiality constraints, read `docs/LEGACY_REUSE.md`. Historical source is excluded from the public GitHub repository. A catalog match does not imply successful semantic reuse: only reviewed, migrated, tested geometry primitives may participate in the future synthesizer.
+
+## Iterative research harness
+
+Read `harness/README.md` and `harness/prompt.md`. Before attempting real CAD rules, confirm the synthetic harness works with `bash harness/run.sh demo`. Use `bash harness/verify.sh PATH` to independently inspect candidates and `runs/harness/*/exploration_log.jsonl` to understand rejected hypotheses. An opt-in Codex CLI loop is available on trusted machines using `bash harness/run.sh codex`. Never bypass verification, weaken tests or pretend the current synthetic-only harness validates STEP.
