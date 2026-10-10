@@ -15,3 +15,6 @@ Read AGENTS.md and docs/PRD.md, ARCHITECTURE.md, ACCEPTANCE_TESTS.md and ROADMAP
 
 ## Data handling
 This repository is public. Keep actual/proprietary STEP, local private labels and generated geometry out of GitHub and remote AI services unless specifically authorized. Follow AGENTS.md and .gitignore.
+
+## Training data: entity-ID labels (schema v2)
+Place `type_a.step`, `type_b.step`, `type_c.step` locally under `data/training/`; copy `labels.example.json` to ignored `labels.json` and set `target_point.entity_id` in each case, for example `118` to identify STEP entity `#118`. Run `cad-rule check-inputs` to check DATA entity/type and simple VERTEX_POINT geometry reference. This does not yet map the entity to TopoDS_Vertex or implement real STEP rule synthesis.

@@ -23,7 +23,7 @@ cad-rule apply --model examples/synthetic_unseen_variant.json --rule results/rul
 - Programmatically generate simple public CAD solids containing face loops and line edges, write STEP, import again.
 - Preserve XCAF assembly occurrence hierarchy and relative/world transforms and mm units.
 - Check known analytic vertex coordinates, curve/surface types, incidences, adjacency and closed/inner loops.
-- Detect missing constructible points and ambiguously labeled vertices.
+- Resolve labeled STEP `#entity` references to true OCCT geometry/topology and reject missing/ambiguous mapping, including CARTESIAN_POINT referenced by 0 or multiple VERTEX_POINTs.
 - Ensure geometry predicates are computed from shape, not labels.
 - Re-export and reorder entity indices to prove rules do not depend on subshape numbering.
 - A selected point in a differently located assembly occurrence is correctly transformed to vehicle frame.
@@ -38,3 +38,10 @@ cad-rule apply --model examples/synthetic_unseen_variant.json --rule results/rul
 ## Confidentiality
 - .gitignore excludes production STEP, raw CAD data and local private label files.
 - No real STEP files sent to remote LLMs or CI without express authorization.
+
+## STEP entity-ID label checks (M0.5)
+- Template is schema v2 and each variant uses `target_point.entity_id`, not manually typed XYZ.
+- Accept both positive integer `118` and text `"#118"`; reject missing/invalid IDs and non-point STEP entities.
+- Verify entity exists in DATA, and `VERTEX_POINT` references an existing `CARTESIAN_POINT`.
+- Ignore comments and quoted semicolons; handle multiline entity records.
+- Report ID/type/reference only; **do not claim OCCT subshape mapping is verified**.

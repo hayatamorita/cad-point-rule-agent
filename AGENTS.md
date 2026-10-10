@@ -22,7 +22,7 @@ Read README.md, docs/PRD.md, docs/ARCHITECTURE.md, docs/ACCEPTANCE_TESTS.md, doc
 1. Run M0 pure-Python synthetic tests.
 2. Implement OCCT STEP reader (prefer XCAF/STEPCAFControl for assemblies), local/world transforms, run-local handles and structured errors.
 3. Build Solid/Face/Wire/Edge/Vertex graph with ownership, incidence, adjacency, curve/surface types and geometric measures.
-4. Enable robust human label matching in specified frames (unambiguous Vertex snapping).
+4. Map human-supplied STEP entity IDs (CARTESIAN_POINT/VERTEX_POINT) through STEP reader model entities into TopoDS_Vertex or explicit geometry; reject missing/ambiguous mapping.
 5. Compute features on unlabeled geometry: relative directions, closed/inner loops, parallelism, orthogonality, distance ratios and reference-edge relations.
 6. Mine predicates that hold for all positive examples and reject all other candidate vertices. Improve simple exact set-cover search with ILP or branch-and-bound.
 7. Add a compositional typed traversal DSL and a CEGIS/beam-search synthesizer. Reference geometry must be selected by its own model-independent rule.
@@ -41,4 +41,7 @@ Read README.md, docs/PRD.md, docs/ARCHITECTURE.md, docs/ACCEPTANCE_TESTS.md, doc
 Commit small reviewable milestones, explain architectural choices and exact test commands. Preserve this specification for future coding agents.
 
 ## Standard supervised STEP input location
-When authorized real STEP datasets are available, read `data/training/README.md` and `data/training/labels.example.json`. A user puts `type_a.step`, `type_b.step`, `type_c.step`, and a locally copied and filled-in `labels.json` together under `data/training/`. Use `cad-rule check-inputs` to validate file presence and annotation JSON before implementing the STEP importer. This command does not inspect STEP geometry or perform rule synthesis. Do not alter this convention without updating the docs, tests and validator. Files with real CAD and labels must stay out of source control.
+When authorized real STEP datasets are available, read `data/training/README.md` and `data/training/labels.example.json`. A user puts `type_a.step`, `type_b.step`, `type_c.step`, and a locally copied `labels.json` with the target `entity_id` for each case together under `data/training/`. The label schema is version 2; the entity ID can be an integer such as `118` or text `"#118"`. `cad-rule check-inputs` currently reads STEP DATA entities and verifies that labeled IDs are `CARTESIAN_POINT` or `VERTEX_POINT`; it does not build OCCT B-rep geometry, distinguish assembly occurrences, or synthesize STEP rules. A geometry-point entity may not correspond to exactly one B-rep vertex. Never infer semantic identity from numbers across different STEP files. Do not alter this convention without updating the docs, tests and validator. Files with real CAD and labels must stay out of source control.
+
+## STEP label principle
+The STEP #entity number identifies the supervised target **only within its source file**. Labels MUST be mapped to geometric/topological nodes through the STEP transfer process, not converted to a hard-coded cross-variant ID rule. For `CARTESIAN_POINT`, handle zero/multiple matching topological vertices explicitly; `VERTEX_POINT` is the preferred unambiguous label for topological vertices, subject to assembly instance mapping.

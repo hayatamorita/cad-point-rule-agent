@@ -9,7 +9,7 @@
 - [ ] Better error explanations, diagnostics, property-based tests and schema tooling.
 
 ## Real STEP input convention
-Training files are placed locally in `data/training/type_a.step`, `type_b.step`, and `type_c.step`; the target-point coordinates go into `data/training/labels.json` (copy from `labels.example.json`). Run `cad-rule check-inputs` to validate paths and JSON. This command is not STEP parsing or point verification. Implement integration with OCCT in M1/M2.
+Training files are placed locally in `data/training/type_a.step`, `type_b.step`, and `type_c.step`; the labeled STEP entity numbers (`target_point.entity_id`, e.g. `118` or `"#118"`) go into `data/training/labels.json` (copy from `labels.example.json`). Run `cad-rule check-inputs` to validate paths and JSON. The current command reads STEP entity assignments in the DATA section and validates the point entity ID/type, but is not an OCCT B-rep importer, assembly mapper or geometric rule verifier. Implement integration with OCCT in M1/M2.
 
 ## M1: STEP ingestion + labeling — START HERE
 - [ ] Choose pinned OCCT Python binding (pythonocc-core, OCP or FreeCAD Python) on the actual Mac/Linux environment; write installation/compatibility instructions.
@@ -17,7 +17,7 @@ Training files are placed locally in `data/training/type_a.step`, `type_b.step`,
 - [ ] Enumerate Solid/Face/Wire/Edge/Vertex with B-rep containment/adjacency.
 - [ ] Preserve units and precision; supply kernel-derived geometric measures and shape types.
 - [ ] Create synthetic STEP fixtures and import/re-export integration tests.
-- [ ] Register labels: coordinate-frame aware Vertex clicking/snapping; reject ambiguous or missing matches.
+- [ ] Register labels by resolving STEP `CARTESIAN_POINT` / `VERTEX_POINT` entity IDs through STEP transfer to TopoDS_Vertex or explicit geometric point. Reject missing/multiple occurrence matches; derive coordinates and frames from source geometry.
 
 ## M2: Real geometric features
 - [ ] Vehicle-frame relative front/left/up, inner and outer closed loops, line/circle edge types.
@@ -42,3 +42,8 @@ Training files are placed locally in `data/training/type_a.step`, `type_b.step`,
 
 ## Immediate next Codex instruction
 Read AGENTS.md and docs. Run M0 tests and synthetic CLI. Implement M1 in a focused pull request with an OCCT-generated public STEP fixture and import/transform tests, without breaking M0. Be explicit about unavailable actual production STEP cases.
+
+## M0.5: STEP entity-ID supervised labels (implemented)
+- [x] `data/training/labels.example.json` uses `schema_version: 2` and per-variant `target_point.entity_id`.
+- [x] Validate the ID exists and is `CARTESIAN_POINT` or `VERTEX_POINT` in its STEP source; follow simple `VERTEX_POINT -> CARTESIAN_POINT` references.
+- [ ] Bridge STEP entities into OCCT transferred TopoDS subshapes and assembly occurrences (M1). `CARTESIAN_POINT` may not map to a unique Vertex.

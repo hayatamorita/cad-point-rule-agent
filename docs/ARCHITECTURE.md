@@ -24,8 +24,8 @@ Preserve separate assembly occurrences of a reusable part and their location tra
 
 Use OCCT TopExp/TopTools to enumerate B-rep subshapes and STEPCAFControl_Reader + XCAF to retain assemblies. Define relative 'front'/'left'/'up' in supplied vehicle frame, not guessed world coordinates.
 
-## Label protocol
-Each training point has XYZ, coordinate_frame and positive tolerance_mm. Convert units and apply occurrence transforms. Reject if zero or more than one Vertex lies within tolerance. During rule inference labels are never accessible.
+## Label protocol (STEP entity-ID based)
+Users specify `entity_id` per source STEP (`118` or `"#118"`), not XYZ. The current lightweight Part 21 DATA entity checker can confirm that #118 is a `CARTESIAN_POINT` or `VERTEX_POINT` and follow direct VERTEX_POINT-to-CARTESIAN_POINT references. In M1, use OCCT's STEP transfer model/entity-to-result mapping to resolve labels onto geometry and/or TopoDS_Vertex in an assembly occurrence; derive physical coordinates, transforms, units, and tolerances there. One geometry point may have zero or multiple topological vertices; reject ambiguities explicitly, and never equate entity IDs across different files. During rule inference STEP IDs and labels must not be accessible to candidate features.
 
 If the selected point is not encoded as a STEP Vertex, support optional geometric construction DSL (midpoint, intersection, projection, center) only when the point is well defined by included geometry. Otherwise report unsupported.
 

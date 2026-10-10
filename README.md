@@ -2,7 +2,7 @@
 
 3種類の同一系統の車両部品（STEPモデル）と、各モデル上で人間が指定した正解点から、**共通の幾何・位相的Point選択ルール**を自動発見するプロジェクトです。
 
-> **現在の実装範囲:** 合成特徴グラフ（JSON）で動く最小ルール合成CLIとテスト。**STEPの読み込み・Open CASCADEによる幾何特徴計算・点のGUIクリック指定は未実装です。** 開発ロードマップに沿って実装してください。
+> **現在の実装範囲:** 合成特徴グラフで動く最小ルール合成CLI・テスト、およびSTEPのラベル用エンティティ番号検査。**Open CASCADEによるB-rep解析・実STEPの共通ルール合成・GUIクリック指定は未実装です。** 開発ロードマップに沿って実装してください。
 
 ## 目的
 
@@ -19,13 +19,13 @@
 
 ## 正解STEPとPoint指定JSONを置く場所
 
-[`data/training/`](data/training/README.md) に `type_a.step`, `type_b.step`, `type_c.step` を置き、[`data/training/labels.example.json`](data/training/labels.example.json) を **`data/training/labels.json`** としてコピーして3点の座標を記入してください。入力の形式を確認するには:
+[`data/training/`](data/training/README.md) に `type_a.step`, `type_b.step`, `type_c.step` を置き、[`data/training/labels.example.json`](data/training/labels.example.json) を **`data/training/labels.json`** としてコピーして3つのSTEPエンティティ番号（例: `118` = `#118`）を記入してください。入力の形式を確認するには:
 
 ```bash
 cad-rule check-inputs
 ```
 
-`check-inputs` はファイルとJSONの整合性をチェックするだけで、**現時点でSTEPを開いて点を特定することはできません**。入力した実STEPはGitHubへpushせずローカルに置いてください（`labels.json` とSTEPはGitの追跡対象外）。
+`check-inputs` はSTEPのDATAセクションを読み、指定された `#番号` が `CARTESIAN_POINT` または `VERTEX_POINT` として存在することを確認します。ただし、**OCCTのB-rep上の頂点との対応付け・ルール合成は未実装**です。入力した実STEPはGitHubへpushせずローカルに置いてください（`labels.json` とSTEPはGitの追跡対象外）。
 
 ## 実行できる合成データのMVP
 

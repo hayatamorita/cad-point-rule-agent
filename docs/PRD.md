@@ -7,7 +7,8 @@ Three STEP assemblies are variants of the same automotive component. A human lab
 
 ## Inputs
 - Three STEP files (extendable to N >= 3).
-- One label per variant, initially a B-rep Vertex: 3D point, tolerance in mm, coordinate-frame identifier and occurrence context.
+- One supervised STEP entity ID per variant (`entity_id: 118` or `"#118"`), identifying a `CARTESIAN_POINT` or `VERTEX_POINT` within that exact STEP file. Map it to one unambiguous CAD geometry/topology target in the STEP/OCCT transfer layer; ambiguity must fail explicitly.
+- The entity number is not a stable correspondence ID across variants. The target's coordinates and frame are derived from STEP/assembly geometry, not manually labeled.
 - Vehicle front/left/up reference basis or trusted metadata; don't assume global +X means forward.
 - Explicit units (convert consistently to mm), model transforms and kernel precision.
 - Optional negative selections and unlabeled fourth STEP for out-of-sample validation.
@@ -26,7 +27,7 @@ Three STEP assemblies are variants of the same automotive component. A human lab
 5. Export reproducible logs and engineering validation metrics.
 
 ## Hard acceptance
-For models G_i, target p_i, tolerance epsilon_i, candidate set C_i(R):
+For models G_i, target p_i resolved from each file's STEP entity label, tolerance epsilon_i and candidate set C_i(R):
 `for every i: |C_i(R)| == 1 and distance(only(C_i(R)),p_i) <= epsilon_i`.
 All 3 models must use the same code/R. Never use file names, IDs, raw coordinates of targets, unstable face/edge/vertex numbers or label-specific branching to select points.
 
@@ -36,7 +37,7 @@ A fully deterministic pure-Python prototype over **precomputed whitelisted Boole
 ## Production scope
 - Import via OCCT, retaining XCAF product occurrence hierarchy, units and transforms.
 - B-rep geometry/topology graph: Part/Solid/Face/Wire/Edge/Vertex and relations.
-- Point labels collected via GUI or JSON; match in correct frames without ambiguity.
+- Point labels are STEP entity IDs in `data/training/labels.json` (schema v2); implement robust transfer entity-to-TopoDS mapping and selection in the correct assembly occurrence. Coordinate-based labels are not required.
 - Geometric predicates: front/left/up, inner/outer closed wires, line/circle, endpoint, parallel/perpendicular, adjacency, normalized length, near/relative spatial properties.
 - Typed compositional DSL; nested reference-edge/face selection.
 - Rule mining via set cover/ILP, enumerative or beam search, counterexample-guided inductive synthesis.

@@ -8,10 +8,10 @@ description: Discover a shared deterministic geometric rule that selects homolog
 Read `AGENTS.md`, `docs/PRD.md`, `docs/ARCHITECTURE.md`, `docs/ACCEPTANCE_TESTS.md`. Never pretend M0 synthetic feature graphs are genuine STEP imports.
 
 ## Procedure
-1. Confirm approved CAD data access. Validate three STEP paths, each corresponding target point, coordinate frames, vehicles axes, unit conversions and tolerances.
+1. Confirm approved CAD data access. Validate three STEP paths, each corresponding target STEP `#entity_id` (CARTESIAN_POINT or VERTEX_POINT), assembly occurrence ambiguity, vehicle axes, unit conversions and tolerances.
 2. Read assembly-aware geometry using supported STEP/XCAF importer, preserving part instances, frame transforms and topology. If importer is not implemented, build it first.
 3. Enumerate candidate vertices and compute geometry/topology features without access to target labels.
-4. Resolve human target labels uniquely to candidates for supervision only; reject ambiguous/missing labels.
+4. Resolve each training STEP entity ID to CAD geometry/topology and an unambiguous model node for supervision only (M1, not implemented); reject zero/multiple matches. Never use STEP entity IDs as rule predicates.
 5. Generate predicates true for all target vertices. Include **all non-target vertices as negatives** so that useless shared predicates do not count as success.
 6. Search shortest consistent predicate combinations, then richer typed hierarchical traversals and reference selections.
 7. Execute the EXACT SAME rule on every variant, requiring one candidate matching each training label within the stated tolerance.
