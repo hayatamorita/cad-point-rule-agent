@@ -27,6 +27,20 @@ cad-rule check-inputs
 
 `check-inputs` はSTEPのDATAセクションを読み、指定された `#番号` が `CARTESIAN_POINT` または `VERTEX_POINT` として存在することを確認します。ただし、**OCCTのB-rep上の頂点との対応付け・ルール合成は未実装**です。入力した実STEPはGitHubへpushせずローカルに置いてください（`labels.json` とSTEPはGitの追跡対象外）。
 
+## 過去のpyoccロジックを再利用する（新機能）
+
+過去のpyocc Pythonコードは [`data/legacy_pyocc/`](data/legacy_pyocc/README.md) にプロジェクト別に置いてください（機密保護のため **Gitには含めない** 設定です）。置いた `.py` から関数・メソッド・利用API・幾何キーワードを **実行せずに静的解析** して再利用候補を探せます。
+
+```bash
+cad-rule legacy-index
+cad-rule legacy-search --query "前方 閉ループ 平行 エッジ"
+cad-rule legacy-promote --function-id 'old_project/find_point.py::find_parallel_edge'
+```
+
+棚入れした候補は `data/legacy_catalog/` に索引・レビュー票として保存します。**実行可能な共通幾何ロジックへの自動変換・STEPを用いた自動採用はまだ未実装**です。移植・テスト後の幾何プリミティブは `src/cad_rule_agent/geometry_primitives/` で管理します。
+
+詳しくは [旧pyoccロジックの再利用設計](docs/LEGACY_REUSE.md) を参照してください。
+
 ## 実行できる合成データのMVP
 
 Python 3.11以上、実行時外部依存なし。

@@ -47,3 +47,11 @@ Read AGENTS.md and docs. Run M0 tests and synthetic CLI. Implement M1 in a focus
 - [x] `data/training/labels.example.json` uses `schema_version: 2` and per-variant `target_point.entity_id`.
 - [x] Validate the ID exists and is `CARTESIAN_POINT` or `VERTEX_POINT` in its STEP source; follow simple `VERTEX_POINT -> CARTESIAN_POINT` references.
 - [ ] Bridge STEP entities into OCCT transferred TopoDS subshapes and assembly occurrences (M1). `CARTESIAN_POINT` may not map to a unique Vertex.
+
+## M0.6: Historical pythonOCC logic reuse (static catalog implemented)
+- [x] Add local, ignored `data/legacy_pyocc/` for old project .py scripts.
+- [x] Static AST indexing, geometry keyword search, function/line/call provenance, English/Japanese query tags.
+- [x] Review-only migration proposal JSON and ignored `data/legacy_catalog/` output.
+- [x] CLI `legacy-index`, `legacy-search`, `legacy-promote` and regression tests.
+- [ ] OCCT-tested primitive promotion and typed DSL registration (M2/M3).
+- [ ] Auto-reuse promoted primitives during STEP rule synthesis and validation (M3).

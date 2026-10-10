@@ -25,3 +25,9 @@ data/private/
 /data/training/labels.json
 /data/training/*.step
 /data/training/*.stp
+
+# Historical pythonOCC source is PRIVATE/local and may contain confidential CAD logic.
+# Keep the folder documentation tracked but ignore anything users place here.
+/data/legacy_pyocc/**
+!/data/legacy_pyocc/README.md
+/data/legacy_catalog/

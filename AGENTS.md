@@ -45,3 +45,10 @@ When authorized real STEP datasets are available, read `data/training/README.md`
 
 ## STEP label principle
 The STEP #entity number identifies the supervised target **only within its source file**. Labels MUST be mapped to geometric/topological nodes through the STEP transfer process, not converted to a hard-coded cross-variant ID rule. For `CARTESIAN_POINT`, handle zero/multiple matching topological vertices explicitly; `VERTEX_POINT` is the preferred unambiguous label for topological vertices, subject to assembly instance mapping.
+
+## Reuse historical pythonOCC code before inventing geometry primitives
+- User places historical Python scripts recursively under `data/legacy_pyocc/`, never commit or upload these scripts without separate authorization (repository is public).
+- **Mandatory at M1/M2/M3 feature planning:** run `cad-rule legacy-index`, then `cad-rule legacy-search --query '<target geometry semantics>'`; use indexed function name, file, line range, tags and call evidence to identify reusable logic.
+- For each promising match, use `cad-rule legacy-promote --function-id '<relative.py::qualified.function>'` to generate a review-required proposal and provenance. Never automatically import/execute old code.
+- Adapt/reimplement the useful geometric predicates/reference selectors into tested, deterministic functions under `src/cad_rule_agent/geometry_primitives/`, and register into the typed rule-synthesis DSL. Check data assumptions, OCCT version, transformations, tolerances, and behavior across three STEP variants. Do not propagate hardcoded file/STEP IDs/XYZ into learned rule.
+- The current catalog is a static AST keyword index, **not** production semantic extraction or an automatic adapter. Consult `docs/LEGACY_REUSE.md` and report that limitation accurately.

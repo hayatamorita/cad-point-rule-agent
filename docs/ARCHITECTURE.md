@@ -74,3 +74,15 @@ Rank accepted rules by cost, angular/distance margin, behavior under perturbed d
 - Tolerances are explicit, numeric margins reported and model constraints validated.
 - Restrict LLM outputs to DSL AST; do not exfiltrate raw CAD or company geometry to cloud services.
 - Keep headless Python CLI independent of optional GUI and MCP adapters.
+
+## Historical pythonOCC reuse subsystem (M0.6 static index implemented)
+```text
+Local-only data/legacy_pyocc/**/*.py
+  → AST parser (never import/execute source)
+  → function / method / API calls / geometry-tag catalog
+  → keyword search (English or Japanese geometry terms)
+  → review-only migration proposal + source hash and location
+  → human/agent review + test-driven port into src/cad_rule_agent/geometry_primitives/
+  → registration in typed DSL grammar (future M2/M3)
+```
+Before inventing a feature predicate, agent should search legacy history, inspect relevant local snippets, understand their constraints and adapt useful methods. A historical rule may itself encode stable references to Face/Wire/Edge/Vertex relationships, but its hardcoded coordinates, STEP entity IDs, assumed orientation, and source-specific filenames must be removed. A catalog hit is only a hypothesis: tests and reviewer approval govern actual DSL admission. The static shelf does NOT cause old code to execute or automatically affect current synthetic-rule inference. See [LEGACY_REUSE.md](LEGACY_REUSE.md).

@@ -45,3 +45,12 @@ cad-rule apply --model examples/synthetic_unseen_variant.json --rule results/rul
 - Verify entity exists in DATA, and `VERTEX_POINT` references an existing `CARTESIAN_POINT`.
 - Ignore comments and quoted semicolons; handle multiline entity records.
 - Report ID/type/reference only; **do not claim OCCT subshape mapping is verified**.
+
+## Legacy code reuse tests (M0.6)
+- Analyze `.py` code with AST without importing, executing or running its top-level side effects.
+- Scan nested folders; ignore symlinks escaping approved root, report invalid/large/non-UTF8 sources.
+- Extract functions, methods, file+line range, called symbols, stable SHA-256 provenance and geometry tags.
+- Rank English/Japanese geometry queries and return candidate function evidence.
+- Draft `approved: false` review-only migration proposal, without creating executable plugins.
+- Refuse to overwrite an existing proposal.
+- Legacy source stays under Git-ignored local data, and may only be incorporated into reviewed OCCT geometry primitives with tests.
