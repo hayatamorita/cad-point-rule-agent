@@ -1,0 +1,269 @@
+{
+  "schema_version": 1,
+  "training_cases": [
+    {
+      "model": {
+        "model_id": "type_A",
+        "units": "mm",
+        "coordinate_frame": "vehicle",
+        "vertices": [
+          {
+            "key": "type_A_target",
+            "xyz": [
+              120,
+              35,
+              20
+            ],
+            "features": {
+              "front_region": true,
+              "on_inner_closed_wire": true,
+              "parallel_to_reference": true,
+              "left_endpoint": true
+            }
+          },
+          {
+            "key": "type_A_distractor_1",
+            "xyz": [
+              131,
+              38,
+              21
+            ],
+            "features": {
+              "front_region": false,
+              "on_inner_closed_wire": true,
+              "parallel_to_reference": true,
+              "left_endpoint": true
+            }
+          },
+          {
+            "key": "type_A_distractor_2",
+            "xyz": [
+              142,
+              41,
+              22
+            ],
+            "features": {
+              "front_region": true,
+              "on_inner_closed_wire": false,
+              "parallel_to_reference": true,
+              "left_endpoint": true
+            }
+          },
+          {
+            "key": "type_A_distractor_3",
+            "xyz": [
+              153,
+              44,
+              23
+            ],
+            "features": {
+              "front_region": true,
+              "on_inner_closed_wire": true,
+              "parallel_to_reference": false,
+              "left_endpoint": true
+            }
+          },
+          {
+            "key": "type_A_distractor_4",
+            "xyz": [
+              164,
+              47,
+              24
+            ],
+            "features": {
+              "front_region": true,
+              "on_inner_closed_wire": true,
+              "parallel_to_reference": true,
+              "left_endpoint": false
+            }
+          }
+        ]
+      },
+      "label": {
+        "xyz": [
+          120,
+          35,
+          20
+        ],
+        "tolerance_mm": 0.01,
+        "coordinate_frame": "vehicle"
+      }
+    },
+    {
+      "model": {
+        "model_id": "type_B",
+        "units": "mm",
+        "coordinate_frame": "vehicle",
+        "vertices": [
+          {
+            "key": "type_B_target",
+            "xyz": [
+              145,
+              42,
+              20
+            ],
+            "features": {
+              "front_region": true,
+              "on_inner_closed_wire": true,
+              "parallel_to_reference": true,
+              "left_endpoint": true
+            }
+          },
+          {
+            "key": "type_B_distractor_1",
+            "xyz": [
+              156,
+              45,
+              21
+            ],
+            "features": {
+              "front_region": false,
+              "on_inner_closed_wire": true,
+              "parallel_to_reference": true,
+              "left_endpoint": true
+            }
+          },
+          {
+            "key": "type_B_distractor_2",
+            "xyz": [
+              167,
+              48,
+              22
+            ],
+            "features": {
+              "front_region": true,
+              "on_inner_closed_wire": false,
+              "parallel_to_reference": true,
+              "left_endpoint": true
+            }
+          },
+          {
+            "key": "type_B_distractor_3",
+            "xyz": [
+              178,
+              51,
+              23
+            ],
+            "features": {
+              "front_region": true,
+              "on_inner_closed_wire": true,
+              "parallel_to_reference": false,
+              "left_endpoint": true
+            }
+          },
+          {
+            "key": "type_B_distractor_4",
+            "xyz": [
+              189,
+              54,
+              24
+            ],
+            "features": {
+              "front_region": true,
+              "on_inner_closed_wire": true,
+              "parallel_to_reference": true,
+              "left_endpoint": false
+            }
+          }
+        ]
+      },
+      "label": {
+        "xyz": [
+          145,
+          42,
+          20
+        ],
+        "tolerance_mm": 0.01,
+        "coordinate_frame": "vehicle"
+      }
+    },
+    {
+      "model": {
+        "model_id": "type_C",
+        "units": "mm",
+        "coordinate_frame": "vehicle",
+        "vertices": [
+          {
+            "key": "type_C_target",
+            "xyz": [
+              132,
+              38,
+              25
+            ],
+            "features": {
+              "front_region": true,
+              "on_inner_closed_wire": true,
+              "parallel_to_reference": true,
+              "left_endpoint": true
+            }
+          },
+          {
+            "key": "type_C_distractor_1",
+            "xyz": [
+              143,
+              41,
+              26
+            ],
+            "features": {
+              "front_region": false,
+              "on_inner_closed_wire": true,
+              "parallel_to_reference": true,
+              "left_endpoint": true
+            }
+          },
+          {
+            "key": "type_C_distractor_2",
+            "xyz": [
+              154,
+              44,
+              27
+            ],
+            "features": {
+              "front_region": true,
+              "on_inner_closed_wire": false,
+              "parallel_to_reference": true,
+              "left_endpoint": true
+            }
+          },
+          {
+            "key": "type_C_distractor_3",
+            "xyz": [
+              165,
+              47,
+              28
+            ],
+            "features": {
+              "front_region": true,
+              "on_inner_closed_wire": true,
+              "parallel_to_reference": false,
+              "left_endpoint": true
+            }
+          },
+          {
+            "key": "type_C_distractor_4",
+            "xyz": [
+              176,
+              50,
+              29
+            ],
+            "features": {
+              "front_region": true,
+              "on_inner_closed_wire": true,
+              "parallel_to_reference": true,
+              "left_endpoint": false
+            }
+          }
+        ]
+      },
+      "label": {
+        "xyz": [
+          132,
+          38,
+          25
+        ],
+        "tolerance_mm": 0.01,
+        "coordinate_frame": "vehicle"
+      }
+    }
+  ]
+}

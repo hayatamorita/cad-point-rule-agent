@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "notes": "Future STEP experiment manifest. Requires a not-yet-implemented STEP import and labeling bridge.",
+  "training_cases": [
+    {
+      "step_path": "data/raw/type_a.step",
+      "point": {
+        "xyz_mm": [
+          120,
+          35,
+          20
+        ],
+        "coordinate_frame": "vehicle",
+        "tolerance_mm": 0.01
+      }
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "rule_type": "conjunction_of_boolean_geometry_features",
+  "predicates": [
+    {
+      "feature": "front_region",
+      "equals": true
+    },
+    {
+      "feature": "left_endpoint",
+      "equals": true
+    },
+    {
+      "feature": "on_inner_closed_wire",
+      "equals": true
+    },
+    {
+      "feature": "parallel_to_reference",
+      "equals": true
+    }
+  ],
+  "notice": "Features must be computed from input geometry WITHOUT the training label; STEP adapter is not implemented."
+}

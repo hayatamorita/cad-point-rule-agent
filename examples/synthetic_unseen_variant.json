@@ -1,0 +1,77 @@
+{
+  "model_id": "holdout",
+  "units": "mm",
+  "coordinate_frame": "vehicle",
+  "vertices": [
+    {
+      "key": "holdout_target",
+      "xyz": [
+        154,
+        47,
+        29
+      ],
+      "features": {
+        "front_region": true,
+        "on_inner_closed_wire": true,
+        "parallel_to_reference": true,
+        "left_endpoint": true
+      }
+    },
+    {
+      "key": "holdout_distractor_1",
+      "xyz": [
+        165,
+        50,
+        30
+      ],
+      "features": {
+        "front_region": false,
+        "on_inner_closed_wire": true,
+        "parallel_to_reference": true,
+        "left_endpoint": true
+      }
+    },
+    {
+      "key": "holdout_distractor_2",
+      "xyz": [
+        176,
+        53,
+        31
+      ],
+      "features": {
+        "front_region": true,
+        "on_inner_closed_wire": false,
+        "parallel_to_reference": true,
+        "left_endpoint": true
+      }
+    },
+    {
+      "key": "holdout_distractor_3",
+      "xyz": [
+        187,
+        56,
+        32
+      ],
+      "features": {
+        "front_region": true,
+        "on_inner_closed_wire": true,
+        "parallel_to_reference": false,
+        "left_endpoint": true
+      }
+    },
+    {
+      "key": "holdout_distractor_4",
+      "xyz": [
+        198,
+        59,
+        33
+      ],
+      "features": {
+        "front_region": true,
+        "on_inner_closed_wire": true,
+        "parallel_to_reference": true,
+        "left_endpoint": false
+      }
+    }
+  ]
+}
