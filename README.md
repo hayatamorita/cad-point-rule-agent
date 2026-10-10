@@ -80,6 +80,10 @@ bash harness/verify.sh runs/harness/demo/candidates/round_04.json
 
 **重要:** まだ実STEPの幾何ルールを自動発見する実行エンジンではありません。実STEPの独立検証器の実装は次のマイルストーンです。
 
+## 次回の実STEP開発に向けたTODO
+
+[**未実装箇所・実装順序をまとめた短い作業メモ**](docs/NEXT_STEPS.md) を参照してください。社内GitHub移行後にM1から着手します。
+
 ## Agentic coding への引き継ぎ
 
 - [AGENTS.md](AGENTS.md) — 開発エージェントの厳守事項
