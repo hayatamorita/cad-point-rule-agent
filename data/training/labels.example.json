@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "units": "mm",
+  "coordinate_frame": "step_global",
+  "vehicle_axes": null,
+  "training_cases": [
+    {
+      "variant": "a",
+      "step_file": "type_a.step",
+      "target_point": {
+        "point_kind": "vertex",
+        "xyz_mm": [
+          null,
+          null,
+          null
+        ],
+        "tolerance_mm": 0.01,
+        "occurrence_path": null
+      }
+    },
+    {
+      "variant": "b",
+      "step_file": "type_b.step",
+      "target_point": {
+        "point_kind": "vertex",
+        "xyz_mm": [
+          null,
+          null,
+          null
+        ],
+        "tolerance_mm": 0.01,
+        "occurrence_path": null
+      }
+    },
+    {
+      "variant": "c",
+      "step_file": "type_c.step",
+      "target_point": {
+        "point_kind": "vertex",
+        "xyz_mm": [
+          null,
+          null,
+          null
+        ],
+        "tolerance_mm": 0.01,
+        "occurrence_path": null
+      }
+    }
+  ]
+}
