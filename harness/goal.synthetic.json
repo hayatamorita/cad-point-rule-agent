@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "mode": "synthetic",
+  "training_dataset": "examples/synthetic_three_variants.json",
+  "holdout_model": "examples/synthetic_unseen_variant.json",
+  "holdout_expected_key": "holdout_target",
+  "min_training_cases": 3,
+  "max_predicates": 8,
+  "unique_required": true,
+  "notice": "Synthetic feature graph only, not actual STEP files"
+}
