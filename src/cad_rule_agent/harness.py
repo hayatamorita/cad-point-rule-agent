@@ -88,6 +88,27 @@ def fingerprint(path: str | Path) -> str:
     return digest.hexdigest()
 
 
+class IntegrityViolation(RuleError):
+    """Supervisor detects candidate agent changes to goal or validator sources."""
+
+
+def verifier_integrity(goal_path: str | Path) -> dict[str, str]:
+    """Hash pinned inputs AND trusted code. An opt-in Codex run is still not a sandbox."""
+    goal = read_goal(goal_path)
+    watched = (
+        Path(goal_path).resolve(),
+        _dataset(goal["training_dataset"]),
+        _dataset(goal["holdout_model"]),
+        ROOT / "src/cad_rule_agent/core.py",
+        ROOT / "src/cad_rule_agent/harness.py",
+        ROOT / "harness/prompt.md",
+    )
+    try:
+        return {str(p): hashlib.sha256(p.read_bytes()).hexdigest() for p in watched}
+    except OSError as exc:
+        raise RuleError(f"Cannot verify protected project inputs: {exc}") from exc
+
+
 def verify(candidate: str | Path, goal_path: str | Path = DEFAULT_GOAL) -> dict[str, Any]:
     """Fail-closed acceptance gate; never accepts tool stdout as proof."""
     goal = read_goal(goal_path)
@@ -231,6 +252,7 @@ def run_codex(goal_path: str | Path = DEFAULT_GOAL,
     if done:
         return done
     prompt_head = (ROOT / "harness" / "prompt.md").read_text(encoding="utf-8")
+    protected_snapshot = verifier_integrity(goal_path)
     feedback = "No previous attempt."
     for round_number in range(state["last_round"] + 1, max_rounds + 1):
         candidate = folder / "candidates" / f"round_{round_number:02d}.json"
@@ -252,6 +274,8 @@ def run_codex(goal_path: str | Path = DEFAULT_GOAL,
                 input=prompt, capture_output=True, text=True, cwd=ROOT,
                 timeout=timeout_seconds, check=False,
             )
+            if verifier_integrity(goal_path) != protected_snapshot:
+                raise IntegrityViolation("Codex changed a protected goal, dataset or verifier source. Restore the checkout; this run is invalid.")
             if result.returncode:
                 raise RuleError(f"Codex exited {result.returncode}: {result.stderr[-500:]}")
             if not candidate.is_file():
@@ -260,6 +284,8 @@ def run_codex(goal_path: str | Path = DEFAULT_GOAL,
             _event(folder, round=round_number, outcome="agent_candidate",
                    candidate=str(candidate))
             return _passed(folder, state_path, digest, round_number, candidate, report)
+        except IntegrityViolation:
+            raise
         except (OSError, subprocess.TimeoutExpired, RuleError) as exc:
             feedback = str(exc)
             _failed(folder, state_path, digest, round_number, feedback)

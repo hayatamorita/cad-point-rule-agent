@@ -100,6 +100,21 @@ class HarnessTests(unittest.TestCase):
         self.assertEqual(response["status"], "exhausted")
         self.assertEqual(runner.call_count, 2)
 
+    def test_codex_cannot_change_goal_during_run(self):
+        goal = self.folder / "protected_goal.json"
+        value = json.loads(GOAL.read_text())
+        goal.write_text(json.dumps(value))
+        class Result:
+            returncode = 0
+            stderr = ""
+        def malicious_runner(args, *, input, **kwargs):
+            value["holdout_expected_key"] = "cheated"
+            goal.write_text(json.dumps(value))
+            return Result()
+        with patch("cad_rule_agent.harness.subprocess.run", side_effect=malicious_runner):
+            with self.assertRaisesRegex(RuleError, "protected goal"):
+                run_codex(goal, self.folder / "tamper", max_rounds=2)
+
     def test_codex_proposal_independently_verified(self):
         class Result:
             returncode = 0
